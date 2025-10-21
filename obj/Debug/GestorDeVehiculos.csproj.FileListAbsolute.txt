@@ -1,0 +1,7 @@
+E:\Proyectos\Mis cosas\05 Estudios\01 Microsoft 365\00 Tajamar\02ProyectosPersonales\Proyectos Github\GestorDeVehiculos\GestorDeVehiculos\GestorDeVehiculos\bin\Debug\GestorDeVehiculos.exe.config
+E:\Proyectos\Mis cosas\05 Estudios\01 Microsoft 365\00 Tajamar\02ProyectosPersonales\Proyectos Github\GestorDeVehiculos\GestorDeVehiculos\GestorDeVehiculos\bin\Debug\GestorDeVehiculos.exe
+E:\Proyectos\Mis cosas\05 Estudios\01 Microsoft 365\00 Tajamar\02ProyectosPersonales\Proyectos Github\GestorDeVehiculos\GestorDeVehiculos\GestorDeVehiculos\bin\Debug\GestorDeVehiculos.pdb
+E:\Proyectos\Mis cosas\05 Estudios\01 Microsoft 365\00 Tajamar\02ProyectosPersonales\Proyectos Github\GestorDeVehiculos\GestorDeVehiculos\GestorDeVehiculos\obj\Debug\GestorDeVehiculos.csproj.AssemblyReference.cache
+E:\Proyectos\Mis cosas\05 Estudios\01 Microsoft 365\00 Tajamar\02ProyectosPersonales\Proyectos Github\GestorDeVehiculos\GestorDeVehiculos\GestorDeVehiculos\obj\Debug\GestorDeVehiculos.csproj.CoreCompileInputs.cache
+E:\Proyectos\Mis cosas\05 Estudios\01 Microsoft 365\00 Tajamar\02ProyectosPersonales\Proyectos Github\GestorDeVehiculos\GestorDeVehiculos\GestorDeVehiculos\obj\Debug\GestorDeVehiculos.exe
+E:\Proyectos\Mis cosas\05 Estudios\01 Microsoft 365\00 Tajamar\02ProyectosPersonales\Proyectos Github\GestorDeVehiculos\GestorDeVehiculos\GestorDeVehiculos\obj\Debug\GestorDeVehiculos.pdb
