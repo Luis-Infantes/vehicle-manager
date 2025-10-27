@@ -1,408 +1,359 @@
-﻿using System;
+﻿
+using VehicleManager;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestorDeVehiculos
+namespace VehicleManager
 {
-    #region Clases
-    // CLASE MADRE VEHICULO
-    public abstract class Vehiculo
+    #region Classes
+    // Abstract base class for vehicles
+    public abstract class Vehicle
     {
-
-        // DEFINICION DE LAS PROPIEDADES BASICAS
-
-        private static int contador = 0;
-
-
+        // Basic properties
         public int Id { get; set; }
-        public string Marca { get; set; }
-        public string Modelo { get; set; }
-        public int Puertas { get; set; }
-        public int Año { get; set; }
-        public float Precio { get; set; }
-        public abstract void Referencia();
+        public string Brand { get; set; }
+        public string Model { get; set; }
+        public int Doors { get; set; }
+        public int Year { get; set; }
+        public float Price { get; set; }
 
+        public abstract void Reference();
 
-
-        // FUNCION BASICA DE ENTRADA DE DATOS PARA REGISTRAR CADA VEHICULO
-        public virtual void Registrar()
+        // Basic input function to register each vehicle
+        public virtual void Register()
         {
-
             Console.Write("Marca: ");
-            Marca = Console.ReadLine();
+            Brand = Console.ReadLine();
 
             Console.Write("Modelo: ");
-            Modelo = Console.ReadLine();
+            Model = Console.ReadLine();
 
             Console.Write("Año: ");
-            Año = int.Parse(Console.ReadLine());
+            Year = int.Parse(Console.ReadLine());
 
             Console.Write("Precio: ");
-            Precio = float.Parse(Console.ReadLine());
-
+            Price = float.Parse(Console.ReadLine());
         }
 
-
-        //FUNCION PARA MOSTRAR EL NUEVO REGISTRO EN EL MOMENTO DE HACERLO
-        public void MostrarVehiculo()
+        // Show the new record at the moment of creation
+        public void ShowVehicle()
         {
-            Console.WriteLine($"Marca: {Marca} - Modelo: {Modelo} - Año: {Año} - Precio: {Precio} Euros");
+            Console.WriteLine($"Marca: {Brand} - Modelo: {Model} - Año: {Year} - Precio: {Price} Euros");
         }
 
-        //--------------
-
-
-        //FUNCION PARA MOSTRAR LOS VEHICULOS CON MAS DATOS EN LA SECCION DE LISTA
-        public virtual void MostrarVehiculoLista()
+        // Show vehicles with more details in the list section
+        public virtual void ShowVehicleInList()
         {
-            Console.WriteLine($" Nº Referencia: {Id} - Marca: {Marca} - Modelo: {Modelo} - Año: {Año}  - Precio base: {Precio}");
+            Console.WriteLine($" Nº Referencia: {Id} - Marca: {Brand} - Modelo: {Model} - Año: {Year}  - Precio base: {Price}");
         }
 
-        //------------
-
-
-
-        //FUNCION CALCULAR IMPUESTO QUE SE APLICA A CADA VEHICULO POR SU TAMAÑO
-        public virtual void CalcularImpuesto(float impuesto)
+        // Calculate tax based on vehicle size
+        public virtual void CalculateTax(float taxRate)
         {
-
-            Console.WriteLine("{0}", (impuesto * Precio) + Precio);
+            Console.WriteLine("{0}", (taxRate * Price) + Price);
         }
-
     }
 
-    //*****CLASE COCHE********
-    public class Coche : Vehiculo, IMantenimiento
+
+
+    //*****CAR CLASS********
+    public class Car : Vehicle, IMaintenance
     {
-
-
-
-        //Funcion constructora Coche
-        public Coche()
+        // Constructor
+        public Car()
         {
         }
 
-        //Funcion virtual de Registro modificada (POLIMORFISMO)
-        public override void Registrar()
+        // Overridden Register function (POLYMORPHISM)
+        public override void Register()
         {
-            base.Registrar();
+            base.Register();
             Console.Write("Nº Puertas: ");
-            Puertas = int.Parse(Console.ReadLine());
+            Doors = int.Parse(Console.ReadLine());
         }
 
-        //Función para mostrar los coches agregados en una lista con datos básicos (SOBRECARGA 1)
-        // Se muestra cada vez que se agrega un coche nuevo
-        public void MostrarCoches(List<Coche> coche)
+        // Overloaded function to show newly added cars (OVERLOAD 1)
+        public void ShowCars(List<Car> cars)
         {
             Console.WriteLine("----------------------------");
             Console.WriteLine("***NUEVO COCHE REGISTRADO***");
             Console.WriteLine("----------------------------");
 
-            foreach (var v in coche)
+            foreach (var v in cars)
             {
-
-                v.MostrarVehiculo();
+                v.ShowVehicle();
             }
+
             Console.WriteLine("¡¡Felicidades!!, el registro se ha realizado correctamente");
             Console.WriteLine("-----------------------------------------");
         }
 
-        //Función virtual calcular impuesto modificada (POLIMORFISMO)
-        public override void CalcularImpuesto(float impuesto)
+        // Overridden tax calculation function (POLYMORPHISM)
+        public override void CalculateTax(float taxRate)
         {
-            Console.WriteLine("Impuesto extra del {0} % sobre el precio del coche: {1} Euros", impuesto, impuesto * Precio);
+            Console.WriteLine("Impuesto extra del {0} % sobre el precio del coche: {1} Euros", taxRate, taxRate * Price);
         }
 
-        //Función para generar un número de referencia
-        private static int contadorCoche = 0;
-        public override void Referencia()
+        // Reference number generator
+        private static int carCounter = 0;
+        public override void Reference()
         {
-            contadorCoche++;
-            Id = contadorCoche;
+            carCounter++;
+            Id = carCounter;
         }
 
-
-
-        //Función virtual Mostrar vehiculos modificada(POLIMORFISMO)
-        //Vuelo a definir el mensaje para definir un orden de las variables
-        public override void MostrarVehiculoLista()
+        // Overridden function to show cars in list (POLYMORPHISM)
+        public override void ShowVehicleInList()
         {
-            Console.WriteLine($" Nº Referencia: {Id} - Marca: {Marca} - Modelo: {Modelo} - Año: {Año} - Nº de puertas: {Puertas} - Precio base: {Precio}");
+            Console.WriteLine($" Nº Referencia: {Id} - Marca: {Brand} - Modelo: {Model} - Año: {Year} - Nº de puertas: {Doors} - Precio base: {Price}");
         }
 
-
-        //Función para mostrar los coches agregados en una lista con datos ampliados (SOBRECARGA 2)
-        // Se muestra cada vez que se accede a la lista de coches
-        public void MostrarCoches(List<Coche> coche, bool mostrardetalles)
+        // Overloaded function to show detailed car list (OVERLOAD 2)
+        public void ShowCars(List<Car> cars, bool showDetails)
         {
             Console.WriteLine("-----------------------");
             Console.WriteLine("***LISTADO DE COCHES***");
             Console.WriteLine("-----------------------");
 
-            foreach (var v in coche)
+            foreach (var v in cars)
             {
                 Console.WriteLine("***Características***");
-                v.MostrarVehiculoLista();
-
+                v.ShowVehicleInList();
             }
-
-
         }
-        // Función heredada del interface Mantenimiento para definir la cantidad del mantenimiento anual (INTERFACE)
-        public void RealizarMantenimiento(float cantidadManten)
+
+        // Interface function to define annual maintenance cost
+        public void PerformMaintenance(float maintenanceCost)
         {
+            float VAT = 0.18f;
 
-            float IVA = 0.18f;
-
-            Console.WriteLine("Coste del mantenimiento anual del coche es de {0} Euros, más un IVA de {1}. En total: {2} Euros", cantidadManten, IVA, (cantidadManten * IVA) + cantidadManten);
+            Console.WriteLine("Coste del mantenimiento anual del coche es de {0} Euros, más un IVA de {1}. En total: {2} Euros", maintenanceCost, VAT, (maintenanceCost * VAT) + maintenanceCost);
             Console.WriteLine("-----------------------");
         }
 
-        //Función para eliminar registro de coche a traves de su número de referencia
-        public void EliminarCoche(List<Coche> cochesRegistrados, int id)
+        // Function to delete a car by reference ID
+        public void DeleteCar(List<Car> registeredCars, int id)
         {
-
-            var cocheAEliminar = cochesRegistrados.FirstOrDefault(c => c.Id == id);
-            if (cocheAEliminar != null)
+            var carToDelete = registeredCars.FirstOrDefault(c => c.Id == id);
+            if (carToDelete != null)
             {
-                cochesRegistrados.Remove(cocheAEliminar);
+                registeredCars.Remove(carToDelete);
                 Console.WriteLine($"Coche con ID {id} eliminado correctamente.");
                 Console.WriteLine("-----------------------");
-
             }
             else
             {
                 Console.WriteLine($"No se encontró ningún coche con ID {id}.");
             }
-
         }
 
-        //Funcion para actualizar los números de referencia de cada coche, cada vez que eliminamos alguno.
-        public void ActualizarId(List<Coche> cochesRegistrados)
+        // Function to update reference IDs after deletion
+        public void UpdateIds(List<Car> registeredCars)
         {
-            int nuevoId = 1;
-            foreach (var coche in cochesRegistrados)
+            int newId = 1;
+            foreach (var car in registeredCars)
             {
-                coche.Id = nuevoId;
-                nuevoId++;
+                car.Id = newId;
+                newId++;
             }
         }
-
-
-
     }
 
-    //*****CLASE MOTO********
-    public class Moto : Vehiculo, IMantenimiento
+
+
+    //*****MOTORBIKE CLASS********
+    public class Motorbike : Vehicle, IMaintenance
     {
+        // Constructor
+        public Motorbike() { }
 
-        //Función constructora
-        public Moto() { }
-
-        //Función para mostrar las motos agregadas en una lista con datos básicos (SOBRECARGA 1)
-        // Se muestra cada vez que se agrega una moto nueva
-        public void MostrarMotos(List<Moto> motos)
+        // Overloaded function to show newly added motorbikes (OVERLOAD 1)
+        public void ShowMotorbikes(List<Motorbike> motorbikes)
         {
             Console.WriteLine("----------------------------");
             Console.WriteLine("***NUEVA MOTO REGISTRADA***");
             Console.WriteLine("----------------------------");
 
-            foreach (var v in motos)
+            foreach (var v in motorbikes)
             {
-
-                v.MostrarVehiculo();
+                v.ShowVehicle();
             }
+
             Console.WriteLine("¡¡Felicidades!!, el registro se ha realizado correctamente");
             Console.WriteLine("-----------------------");
         }
 
-        //Función calcular impuesto modificada(POLIMORFISMO)
-        public override void CalcularImpuesto(float impuesto)
+        // Overridden tax calculation function (POLYMORPHISM)
+        public override void CalculateTax(float taxRate)
         {
-            Console.WriteLine("Impuesto extra del {0} % sobre el precio de la moto: {1} Euros", impuesto, impuesto * Precio);
+            Console.WriteLine("Impuesto extra del {0} % sobre el precio de la moto: {1} Euros", taxRate, taxRate * Price);
         }
 
-
-        //Función para generar un número de referencia
-        private static int contadorMoto = 0;
-        public override void Referencia()
+        // Reference number generator
+        private static int motorbikeCounter = 0;
+        public override void Reference()
         {
-            contadorMoto++;
-            Id = contadorMoto;
+            motorbikeCounter++;
+            Id = motorbikeCounter;
         }
 
-
-        //Función para mostrar las motos agregadas en una lista con datos amplios (SOBRECARGA 2)
-        // Se muestra cada vez que se accede a la lista general de motos
-        public void MostrarMotos(List<Moto> moto, bool mostrardetalles)
+        // Overloaded function to show detailed motorbike list (OVERLOAD 2)
+        public void ShowMotorbikes(List<Motorbike> motorbikes, bool showDetails)
         {
             Console.WriteLine("-----------------------");
             Console.WriteLine("***LISTADO DE MOTOS***");
             Console.WriteLine("-----------------------");
 
-            foreach (var v in moto)
+            foreach (var v in motorbikes)
             {
                 Console.WriteLine("***Características***");
-                v.MostrarVehiculoLista();
-
+                v.ShowVehicleInList();
             }
-
-
         }
-        // Función heredada del interface Mantenimiento para definir la cantidad del mantenimiento anual (INTERFACE)
-        public void RealizarMantenimiento(float cantidadManten)
+
+        // Interface function to define annual maintenance cost
+        public void PerformMaintenance(float maintenanceCost)
         {
+            float VAT = 0.11f;
 
-            float IVA = 0.11f;
-
-            Console.WriteLine("Coste del mantenimiento anual de la moto es de {0} Euros, más un IVA de {1}. En total: {2} Euros", cantidadManten, IVA, (cantidadManten * IVA) + cantidadManten);
+            Console.WriteLine("Coste del mantenimiento anual de la moto es de {0} Euros, más un IVA de {1}. En total: {2} Euros", maintenanceCost, VAT, (maintenanceCost * VAT) + maintenanceCost);
             Console.WriteLine("-----------------------");
         }
 
-
-        //Función para eliminar registro de moto a traves de su número de referencia
-        public void EliminarMoto(List<Moto> motosRegistradas, int id)
+        // Function to delete a motorbike by reference ID
+        public void DeleteMotorbike(List<Motorbike> registeredMotorbikes, int id)
         {
-
-            var motoAEliminar = motosRegistradas.FirstOrDefault(c => c.Id == id);
-            if (motoAEliminar != null)
+            var motorbikeToDelete = registeredMotorbikes.FirstOrDefault(m => m.Id == id);
+            if (motorbikeToDelete != null)
             {
-                motosRegistradas.Remove(motoAEliminar);
+                registeredMotorbikes.Remove(motorbikeToDelete);
                 Console.WriteLine($"Coche con ID {id} eliminado correctamente.");
-                //Console.WriteLine("Pulse la tecla espacio para continuar");
                 Console.WriteLine("-----------------------");
-
             }
             else
             {
                 Console.WriteLine($"No se encontró ningún coche con ID {id}.");
             }
-
         }
 
-        //Funcion para actualizar los números de referencia de cada moto, cada vez que eliminamos alguna.
-        public void ActualizarId(List<Moto> motosRegistradas)
+        // Function to update reference IDs after deletion
+        public void UpdateIds(List<Motorbike> registeredMotorbikes)
         {
-            int nuevoId = 1;
-            foreach (var moto in motosRegistradas)
+            int newId = 1;
+            foreach (var motorbike in registeredMotorbikes)
             {
-                moto.Id = nuevoId;
-                nuevoId++;
+                motorbike.Id = newId;
+                newId++;
             }
         }
     }
 
-    //*****CLASE CAMION********
-    public class Camion : Vehiculo
-    {
-        //Función constructora
-        public Camion() { }
 
-        //Funcion virtual de Registro modificada (POLIMORFISMO)
-        public override void Registrar()
+
+    //*****TRUCK CLASS********
+    public class Truck : Vehicle
+    {
+        // Constructor
+        public Truck() { }
+
+        // Overridden Register function (POLYMORPHISM)
+        public override void Register()
         {
-            base.Registrar();
+            base.Register();
             Console.Write("Nº Puertas: ");
-            Puertas = int.Parse(Console.ReadLine());
+            Doors = int.Parse(Console.ReadLine());
         }
 
-        //Función para mostrar los camiones agregados en una lista con datos básicos (SOBRECARGA 1)
-        // Se muestra cada vez que se agrega un camión nuevo
-        public void MostrarCamiones(List<Camion> camion)
+        // Overloaded function to show newly added trucks (OVERLOAD 1)
+        public void ShowTrucks(List<Truck> trucks)
         {
             Console.WriteLine("----------------------------");
             Console.WriteLine("***NUEVO CAMION REGISTRADO***");
             Console.WriteLine("----------------------------");
 
-            foreach (var v in camion)
+            foreach (var v in trucks)
             {
-
-                v.MostrarVehiculo();
+                v.ShowVehicle();
             }
+
             Console.WriteLine("¡¡Felicidades!!, el registro se ha realizado correctamente");
             Console.WriteLine("-----------------------");
         }
 
-        //Función calcular impuesto modificada (POLIMORFISMO)
-        public override void CalcularImpuesto(float impuesto)
+        // Overridden tax calculation function (POLYMORPHISM)
+        public override void CalculateTax(float taxRate)
         {
-            Console.WriteLine("Impuesto extra del {0} % sobre el precio del camion: {1} Euros", impuesto, impuesto * Precio);
+            Console.WriteLine("Impuesto extra del {0} % sobre el precio del camion: {1} Euros", taxRate, taxRate * Price);
         }
 
-        //Función para generar un número de referencia
-        private static int contadorCamion = 0;
-        public override void Referencia()
+        // Reference number generator
+        private static int truckCounter = 0;
+        public override void Reference()
         {
-            contadorCamion++;
-            Id = contadorCamion;
+            truckCounter++;
+            Id = truckCounter;
         }
 
-        //Función virtual Mostrar vehiculos modificada(POLIMORFISMO)
-        //Vuelo a definir el mensaje para definir un orden de las variables
-        public override void MostrarVehiculoLista()
+        // Overridden function to show trucks in list (POLYMORPHISM)
+        public override void ShowVehicleInList()
         {
-            Console.WriteLine($" Nº Referencia: {Id} - Marca: {Marca} - Modelo: {Modelo} - Año: {Año} - Nº de puertas: {Puertas} - Precio base: {Precio}");
+            Console.WriteLine($" Nº Referencia: {Id} - Marca: {Brand} - Modelo: {Model} - Año: {Year} - Nº de puertas: {Doors} - Precio base: {Price}");
         }
 
-        //Función para mostrar los coches agregados en una lista con datos amplios (SOBRECARGA 2)
-        // Se muestra cada vez que se accede a la lista general
-        public void MostrarCamiones(List<Camion> camion, bool mostrardetalles)
+        // Overloaded function to show detailed truck list (OVERLOAD 2)
+        public void ShowTrucks(List<Truck> trucks, bool showDetails)
         {
             Console.WriteLine("-----------------------");
             Console.WriteLine("***LISTADO DE CAMIONES***");
             Console.WriteLine("-----------------------");
 
-            foreach (var v in camion)
+            foreach (var v in trucks)
             {
                 Console.WriteLine("***Características***");
-                v.MostrarVehiculoLista();
-
+                v.ShowVehicleInList();
             }
-
-
         }
-        //Función heredada del interface Mantenimiento para definir la cantidad del mantenimiento anual (INTERFACE) 
-        public void RealizarMantenimiento(float cantidadManten)
+
+        // Interface function to define annual maintenance cost
+        public void PerformMaintenance(float maintenanceCost)
         {
+            float VAT = 0.45f;
 
-            float IVA = 0.45f;
-
-            Console.WriteLine("Coste del mantenimiento anual del camion es de {0} Euros, más un IVA de {1}. En total: {2} Euros", cantidadManten, IVA, (cantidadManten * IVA) + cantidadManten);
+            Console.WriteLine("Coste del mantenimiento anual del camion es de {0} Euros, más un IVA de {1}. En total: {2} Euros", maintenanceCost, VAT, (maintenanceCost * VAT) + maintenanceCost);
             Console.WriteLine("-----------------------");
         }
 
-        //Función para eliminar registro de camión a traves de su número de referencia
-        public void EliminarCamion(List<Camion> camionesRegistrados, int id)
+        // Function to delete a truck by reference ID
+        public void DeleteTruck(List<Truck> registeredTrucks, int id)
         {
-
-            var camionAEliminar = camionesRegistrados.FirstOrDefault(c => c.Id == id);
-            if (camionAEliminar != null)
+            var truckToDelete = registeredTrucks.FirstOrDefault(t => t.Id == id);
+            if (truckToDelete != null)
             {
-                camionesRegistrados.Remove(camionAEliminar);
+                registeredTrucks.Remove(truckToDelete);
                 Console.WriteLine($"Coche con ID {id} eliminado correctamente.");
                 Console.WriteLine("-----------------------");
-
             }
             else
             {
                 Console.WriteLine($"No se encontró ningún coche con ID {id}.");
             }
-
         }
 
-        //Funcion para actualizar los números de referencia de cada camión, cada vez que eliminamos alguno.
-        public void ActualizarId(List<Camion> camionesRegistrados)
+        // Function to update reference IDs after deletion
+        public void UpdateIds(List<Truck> registeredTrucks)
         {
-            int nuevoId = 1;
-            foreach (var camion in camionesRegistrados)
+            int newId = 1;
+            foreach (var truck in registeredTrucks)
             {
-                camion.Id = nuevoId;
-                nuevoId++;
+                truck.Id = newId;
+                newId++;
             }
         }
     }
+
 
     #endregion
 }

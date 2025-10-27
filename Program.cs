@@ -1,270 +1,220 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VehicleManager;
 
-namespace GestorDeVehiculos
+namespace VehicleManager
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            #region GESTOR DE VEHICULOS
+            #region VEHICLE MANAGER
 
+            // Lists to register each new vehicle
+            List<Car> registeredCars = new List<Car> { };
+            List<Motorbike> registeredMotorbikes = new List<Motorbike> { };
+            List<Truck> registeredTrucks = new List<Truck> { };
 
-            //Listas de vehiculos para registrar cada nuevo vehículo
+            // Console menu design
+            bool exit = false;
 
-            List<Coche> cochesRegistrados = new List<Coche> { };
-            List<Moto> motosRegistradas = new List<Moto> { };
-            List<Camion> caminonesRegistrados = new List<Camion> { };
-
-            //Diseño del menú de consola
-
-            bool salir = false;
-
-            while (!salir)
+            while (!exit)
             {
-                //Menú gestor de vehículos
+                // Vehicle manager menu
                 Console.WriteLine("***GESTOR DE VEHICULOS***");
                 Console.WriteLine("1 Registrar");
                 Console.WriteLine("2 Listado");
                 Console.WriteLine("3 Eliminar");
                 Console.WriteLine("4 Salir");
-                Console.WriteLine("Por favor, selecciona una opción introduciento uno de los números");
+                Console.WriteLine("Por favor, selecciona una opción introduciendo uno de los números");
                 Console.Write("Número: ");
-                string Opcion = Console.ReadLine();
+                string option = Console.ReadLine();
 
-                switch (Opcion)
+                switch (option)
                 {
-                    // Acceso a registro de vehículos
+                    // Access to vehicle registration
                     case "1":
                         Console.WriteLine("***REGISTRO DE VEHICULOS***");
                         Console.WriteLine("1 Coches");
                         Console.WriteLine("2 Motos");
                         Console.WriteLine("3 Camiones");
-                        Console.WriteLine("Por favor, selecciona una opción introduciento uno de los números");
-                        Console.Write("Numero: ");
-                        string tiposRegistro = Console.ReadLine();
+                        Console.WriteLine("Por favor, selecciona una opción introduciendo uno de los números");
+                        Console.Write("Número: ");
+                        string registrationType = Console.ReadLine();
 
-
-                        switch (tiposRegistro)
+                        switch (registrationType)
                         {
-                            //Registrar un nuevo coche
                             case "1":
-
-                                if (tiposRegistro == "1")
-                                {
-                                    Coche auto = new Coche();
-                                    Console.WriteLine("Registrando un nuevo coche");
-                                    auto.Registrar();
-                                    auto.Referencia();
-                                    float impuestoCoche = 0.21f;
-                                    auto.CalcularImpuesto(impuestoCoche);
-                                    cochesRegistrados.Add(auto);
-                                    auto.MostrarCoches(new List<Coche> { auto }); // Mostrar solo el nuevo registro de coche
-                                }
+                                Car car = new Car();
+                                Console.WriteLine("Registrando un nuevo coche");
+                                car.Register();
+                                car.Reference();
+                                float carTax = 0.21f;
+                                car.CalculateTax(carTax);
+                                registeredCars.Add(car);
+                                car.ShowCars(new List<Car> { car });
                                 break;
-                            //Registrar una nueva moto
+
                             case "2":
-
-                                if (tiposRegistro == "2")
-                                {
-                                    Moto moto = new Moto();
-                                    Console.WriteLine("Registrando una nueva moto");
-                                    moto.Registrar();
-                                    moto.Referencia();
-                                    float impuestoMoto = 0.11f;
-                                    moto.CalcularImpuesto(impuestoMoto);
-                                    motosRegistradas.Add(moto);
-                                    moto.MostrarMotos(new List<Moto> { moto }); // Mostrar solo el nuevo registo de moto
-                                }
+                                Motorbike motorbike = new Motorbike();
+                                Console.WriteLine("Registrando una nueva moto");
+                                motorbike.Register();
+                                motorbike.Reference();
+                                float motorbikeTax = 0.11f;
+                                motorbike.CalculateTax(motorbikeTax);
+                                registeredMotorbikes.Add(motorbike);
+                                motorbike.ShowMotorbikes(new List<Motorbike> { motorbike });
                                 break;
 
-                            //Registrar un nuevo camion
                             case "3":
-
-                                if (tiposRegistro == "3")
-                                {
-                                    Camion camion = new Camion();
-                                    Console.WriteLine("Registrando un nuevo camion");
-                                    camion.Registrar();
-                                    camion.Referencia();
-                                    float impuestoCamion = 0.45f;
-                                    camion.CalcularImpuesto(impuestoCamion);
-                                    caminonesRegistrados.Add(camion);
-                                    camion.MostrarCamiones(new List<Camion> { camion }); // Mostrar solo el nuevo registo de camion
-                                }
+                                Truck truck = new Truck();
+                                Console.WriteLine("Registrando un nuevo camion");
+                                truck.Register();
+                                truck.Reference();
+                                float truckTax = 0.45f;
+                                truck.CalculateTax(truckTax);
+                                registeredTrucks.Add(truck);
+                                truck.ShowTrucks(new List<Truck> { truck });
                                 break;
-
-
-
-
                         }
                         break;
-                    // Acceso a listado de vehículos
+
+
+                    // Access to vehicle listing
                     case "2":
                         Console.WriteLine("***LISTADO DE VEHICULOS***");
                         Console.WriteLine("1 Coches");
                         Console.WriteLine("2 Motos");
                         Console.WriteLine("3 Camiones");
-                        Console.WriteLine("Por favor, selecciona una opción introduciento uno de los números");
-                        Console.Write("Numero: ");
-                        string tiposListar = Console.ReadLine();
+                        Console.WriteLine("Por favor, selecciona una opción introduciendo uno de los números");
+                        Console.Write("Número: ");
+                        string listingType = Console.ReadLine();
 
-
-                        switch (tiposListar)
+                        switch (listingType)
                         {
-                            //Acceso a lista de coches
+                            // Access to car list
                             case "1":
-
-                                if (tiposListar == "1")
-                                {
-                                    Coche listaCoches = new Coche();
-                                    listaCoches.MostrarCoches(cochesRegistrados, true);// Mostrar todos con detalles                                    
-                                    float mantenimiento = 300;
-                                    listaCoches.RealizarMantenimiento(mantenimiento);
-
-
-                                }
+                                Car carList = new Car();
+                                carList.ShowCars(registeredCars, true); // Show all with details
+                                float carMaintenance = 300;
+                                carList.PerformMaintenance(carMaintenance);
                                 break;
-                            //Acceso lista de motos
+
+                            // Access to motorbike list
                             case "2":
-
-                                if (tiposListar == "2")
-                                {
-                                    Moto listaMotos = new Moto();
-                                    listaMotos.MostrarMotos(motosRegistradas, true);// Mostrar todos con detalles                                    
-                                    float mantenimiento = 99;
-                                    listaMotos.RealizarMantenimiento(mantenimiento);
-
-
-                                }
+                                Motorbike motorbikeList = new Motorbike();
+                                motorbikeList.ShowMotorbikes(registeredMotorbikes, true); // Show all with details
+                                float motorbikeMaintenance = 99;
+                                motorbikeList.PerformMaintenance(motorbikeMaintenance);
                                 break;
-                            //Acceso lista de camiones
+
+                            // Access to truck list
                             case "3":
-
-                                if (tiposListar == "3")
-                                {
-                                    Camion listaCamiones = new Camion();
-                                    listaCamiones.MostrarCamiones(caminonesRegistrados, true);// Mostrar todos con detalles                                    
-                                    float mantenimiento = 850;
-                                    listaCamiones.RealizarMantenimiento(mantenimiento);
-
-
-                                }
+                                Truck truckList = new Truck();
+                                truckList.ShowTrucks(registeredTrucks, true); // Show all with details
+                                float truckMaintenance = 850;
+                                truckList.PerformMaintenance(truckMaintenance);
                                 break;
-
                         }
                         break;
-                    // Acceso a eliminar vehiculos 
+
+
+                    // Access to vehicle deletion
                     case "3":
                         Console.WriteLine("***ELIMINAR DE VEHICULOS***");
                         Console.WriteLine("1 Coches");
                         Console.WriteLine("2 Motos");
                         Console.WriteLine("3 Camiones");
-                        Console.WriteLine("Por favor, selecciona una opción introduciento uno de los números");
-                        Console.Write("Numero: ");
-                        string tiposEliminar = Console.ReadLine();
+                        Console.WriteLine("Por favor, selecciona una opción introduciendo uno de los números");
+                        Console.Write("Número: ");
+                        string deletionType = Console.ReadLine();
 
-
-                        switch (tiposEliminar)
+                        switch (deletionType)
                         {
-                            //Eliminar coches
+                            // Delete cars
                             case "1":
+                                Car carList = new Car();
+                                carList.ShowCars(registeredCars, true);
+                                float carMaintenance = 300;
+                                carList.PerformMaintenance(carMaintenance);
+                                Console.WriteLine("---------------------");
+                                Console.WriteLine("Por favor, introduce el Nº de referencia para eliminar el coche deseado");
+                                Console.Write("Nº de referencia: ");
 
-                                if (tiposEliminar == "1")
+                                if (int.TryParse(Console.ReadLine(), out int carId))
                                 {
-                                    Coche listaCoches = new Coche();
-                                    listaCoches.MostrarCoches(cochesRegistrados, true);// Mostrar todos con detalles                                    
-                                    float mantenimiento = 300;
-                                    listaCoches.RealizarMantenimiento(mantenimiento);
-                                    Console.WriteLine("---------------------");
-                                    Console.WriteLine("Por favor, introduce el Nº de referencia para eliminar el coche deseado");
-                                    Console.Write("Nº de referencia: ");
-
-                                    if (int.TryParse(Console.ReadLine(), out int id))
-                                    {
-                                        listaCoches.EliminarCoche(cochesRegistrados, id);// Llamo al método para eliminar
-                                        listaCoches.ActualizarId(cochesRegistrados);
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("El Nº de referencia es inválido. Debe de ser un número entero");
-                                    }
-
+                                    carList.DeleteCar(registeredCars, carId);
+                                    carList.UpdateIds(registeredCars);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("El Nº de referencia es inválido. Debe de ser un número entero");
                                 }
                                 break;
-                            //Eliminar motos
+
+                            // Delete motorbikes
                             case "2":
+                                Motorbike motorbikeList = new Motorbike();
+                                motorbikeList.ShowMotorbikes(registeredMotorbikes, true);
+                                float motorbikeMaintenance = 300;
+                                motorbikeList.PerformMaintenance(motorbikeMaintenance);
+                                Console.WriteLine("---------------------");
+                                Console.WriteLine("Por favor, introduce el Nº de referencia para eliminar la moto deseada");
+                                Console.Write("Nº de referencia: ");
 
-                                if (tiposEliminar == "2")
+                                if (int.TryParse(Console.ReadLine(), out int motorbikeId))
                                 {
-                                    Moto listaMotos = new Moto();
-                                    listaMotos.MostrarMotos(motosRegistradas, true);// Mostrar todos con detalles                                    
-                                    float mantenimiento = 300;
-                                    listaMotos.RealizarMantenimiento(mantenimiento);
-                                    Console.WriteLine("---------------------");
-                                    Console.WriteLine("Por favor, introduce el Nº de referencia para eliminar la moto deseada");
-                                    Console.Write("Nº de referencia: ");
-
-                                    if (int.TryParse(Console.ReadLine(), out int id))
-                                    {
-                                        listaMotos.EliminarMoto(motosRegistradas, id);// Llamo al método para eliminar
-                                        listaMotos.ActualizarId(motosRegistradas);
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("El Nº de referencia es inválido. Debe de ser un número entero");
-                                    }
-
+                                    motorbikeList.DeleteMotorbike(registeredMotorbikes, motorbikeId);
+                                    motorbikeList.UpdateIds(registeredMotorbikes);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("El Nº de referencia es inválido. Debe de ser un número entero");
                                 }
                                 break;
-                            //Eliminar camiones
+
+                            // Delete trucks
                             case "3":
+                                Truck truckList = new Truck();
+                                truckList.ShowTrucks(registeredTrucks, true);
+                                float truckMaintenance = 300;
+                                truckList.PerformMaintenance(truckMaintenance);
+                                Console.WriteLine("---------------------");
+                                Console.WriteLine("Por favor, introduce el Nº de referencia para eliminar el camión deseado");
+                                Console.Write("Nº de referencia: ");
 
-                                if (tiposEliminar == "3")
+                                if (int.TryParse(Console.ReadLine(), out int truckId))
                                 {
-                                    Camion listaCamiones = new Camion();
-                                    listaCamiones.MostrarCamiones(caminonesRegistrados, true);// Mostrar todos con detalles                                    
-                                    float mantenimiento = 300;
-                                    listaCamiones.RealizarMantenimiento(mantenimiento);
-                                    Console.WriteLine("---------------------");
-                                    Console.WriteLine("Por favor, introduce el Nº de referencia para eliminar el camión deseado");
-                                    Console.Write("Nº de referencia: ");
-
-                                    if (int.TryParse(Console.ReadLine(), out int id))
-                                    {
-                                        listaCamiones.EliminarCamion(caminonesRegistrados, id);// Llamo al método para eliminar
-                                        listaCamiones.ActualizarId(caminonesRegistrados);
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("El Nº de referencia es inválido. Debe de ser un número entero");
-                                    }
-
+                                    truckList.DeleteTruck(registeredTrucks, truckId);
+                                    truckList.UpdateIds(registeredTrucks);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("El Nº de referencia es inválido. Debe de ser un número entero");
                                 }
                                 break;
                         }
                         break;
-                    // Salir del programa
+
+                    // Exit the program
                     case "4":
-                        salir = true;
+                        exit = true;
                         Console.WriteLine("Has salido del programa");
                         break;
-                    // Última opción en caso de error
+
+                    // Default option in case of error
                     default:
                         Console.WriteLine("Opción NO disponible. Por favor inténtelo de nuevo.");
                         break;
-
                 }
 
+                Console.ReadKey();
 
+                #endregion
             }
-
-
-            Console.ReadKey();
-            #endregion
         }
-    }
 }

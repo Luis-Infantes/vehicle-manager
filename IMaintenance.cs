@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestorDeVehiculos
+
+namespace VehicleManager
 {
-    public interface IMantenimiento
+    public interface IMaintenance
     {
         void RealizarMantenimiento(float cantidad);
     }
 }
+
